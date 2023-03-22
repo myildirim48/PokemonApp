@@ -65,7 +65,7 @@ class PokemonVM: NSObject {
         guard state == .ready else { return }
         state = .loading
         
-        let offsetQuery: [Query] = [.offset("50")]
+        let offsetQuery: [Query] = [.limit("1281")]
         
         requestLoader.load(data: offsetQuery) { [weak self] result in
             guard let self = self else { return }

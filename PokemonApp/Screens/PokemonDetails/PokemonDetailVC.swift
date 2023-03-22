@@ -41,6 +41,7 @@ class PokemonDetailVC: UIViewController {
         detailVM.pokemonDetailsVoid = { data in
             self.updateUI(with: data)
         }
+        detailVM.errorHandler = self
     }
     
     private func configureDoneButton(){
@@ -107,3 +108,10 @@ class PokemonDetailVC: UIViewController {
     }
 }
         
+//MARK: -  Error handler
+
+extension PokemonDetailVC: PokemonDetailViewModelErrorHandler {
+    func viewModelDidReceiveError(error: UserFriendlyError) {
+        presentAlertWithError(message: error) { _ in }
+    }
+}

@@ -33,6 +33,7 @@
 		74F4A67B29CAFBD300FC54B0 /* RequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F4A67A29CAFBD300FC54B0 /* RequestLoader.swift */; };
 		74F4A67D29CB002700FC54B0 /* PokemonDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F4A67C29CB002700FC54B0 /* PokemonDetailVC.swift */; };
 		74F4A68029CB003F00FC54B0 /* PokemonDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F4A67F29CB003F00FC54B0 /* PokemonDetailVM.swift */; };
+		74F4A68229CB264900FC54B0 /* UrlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F4A68129CB264900FC54B0 /* UrlConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		74F4A67A29CAFBD300FC54B0 /* RequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoader.swift; sourceTree = "<group>"; };
 		74F4A67C29CB002700FC54B0 /* PokemonDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailVC.swift; sourceTree = "<group>"; };
 		74F4A67F29CB003F00FC54B0 /* PokemonDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailVM.swift; sourceTree = "<group>"; };
+		74F4A68129CB264900FC54B0 /* UrlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				74F4A67029C9D96600FC54B0 /* UIHelper.swift */,
+				74F4A68129CB264900FC54B0 /* UrlConstants.swift */,
 			);
 			path = Utililities;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				74F4A64D29C9BC1700FC54B0 /* ImageFetcher.swift in Sources */,
 				74F4A65729C9BCAE00FC54B0 /* PokemonCell.swift in Sources */,
 				74F4A66B29C9D35A00FC54B0 /* PokLabel.swift in Sources */,
+				74F4A68229CB264900FC54B0 /* UrlConstants.swift in Sources */,
 				74F4A64529C9BBA600FC54B0 /* PokemonVM.swift in Sources */,
 				74F4A66429C9CD7500FC54B0 /* Query.swift in Sources */,
 				74F4A65A29C9C01000FC54B0 /* PokemonRequest.swift in Sources */,

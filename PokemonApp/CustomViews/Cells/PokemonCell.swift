@@ -30,8 +30,7 @@ class PokemonCell: UICollectionViewCell {
         didSet {
             guard let pokemon = pokemon else { return }
             nameLabel.text = pokemon.name.capitalizingFirstLetter()
-            imgUrlFromVC = pokemon.url.slice(from: "pokemon/", to: "/") ?? "Error while slice the url"
-            let newUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(imgUrlFromVC).png"
+            let newUrl = pokemon.url.toImgurl()
             Task {
                 self.imageView.image = await ImageFetcher.shared.downloadImage(from: newUrl)
                 self.activityIndicator.stopAnimating()

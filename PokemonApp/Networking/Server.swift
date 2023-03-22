@@ -11,7 +11,7 @@ class Server {
     public var baseURL: URL
 
     
-    init(baseURL: URL = URL(string: "https://pokeapi.co/api/v2/")!) {
+    init(baseURL: URL = URL(string: UrlConstanst.baseUrl)!) {
         self.baseURL = baseURL
     }
     

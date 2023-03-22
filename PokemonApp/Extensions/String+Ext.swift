@@ -19,4 +19,10 @@ extension String {
         }
     }
     
+    func toImgurl() -> String {
+        
+        let sliced = self.slice(from: "pokemon/", to: "/") ?? " "
+        
+        return UrlConstanst.imgUrl + sliced + ".png"
+    }
 }
