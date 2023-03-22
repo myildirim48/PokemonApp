@@ -8,5 +8,5 @@ Developed with UIKit, No Storyboard, Diffable Data Source, MVVM, Without 3rd Par
 - API : [PokeApi](https://pokeapi.co)        
 
  #### Gif
- ![](https://github.com/myildirim48/MarvelApp-Mvvm-Programmatic/blob/main/Marvel-App/MarvelApp.gif?raw=true)
+ ![](https://github.com/myildirim48/PokemonApp/blob/main/PokeApp.gif?raw=true)
 
