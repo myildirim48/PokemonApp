@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol PokemonDetailViewModelErrorHandler: NSObject {
     func viewModelDidReceiveError(error: UserFriendlyError)
 }

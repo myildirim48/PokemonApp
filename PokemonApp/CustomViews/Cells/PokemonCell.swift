@@ -15,7 +15,6 @@ class PokemonCell: UICollectionViewCell {
                              , font: .systemFont(ofSize: 18,weight: .semibold))
     let activityIndicator = UIActivityIndicatorView(style: .medium)
     
-    private var imgUrlFromVC : String = ""
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()

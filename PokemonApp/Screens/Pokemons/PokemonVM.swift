@@ -6,21 +6,18 @@
 //
 
 import Foundation
+
 protocol PokemonViewModelErrorHandler: NSObject {
     func viewModelDidReceiveError(error: UserFriendlyError)
 }
 
 class PokemonVM: NSObject {
-    private enum State { case ready, loading }
-
-    private var state: State = .ready
+    
     private var request : PokemonRequest<PokemonModel>!
     private var requestLoader : RequestLoader<PokemonRequest<PokemonModel>>!
     private var dataSource : PokemonDataSource?
     
     private let environment: Environment
-    
-    private var pokemonData: PokemonModel?
     
     weak var errorHandler: PokemonViewModelErrorHandler?
     
@@ -42,7 +39,6 @@ class PokemonVM: NSObject {
     }
     private func appendDataSource(with pokemon: [PokemonModelResult]) {
         guard let dataSource = dataSource else { return }
-        defer { state = .ready }
 
         var currentSnapshot = dataSource.snapshot()
         currentSnapshot.appendItems(pokemon, toSection: .main)
@@ -62,8 +58,6 @@ class PokemonVM: NSObject {
     
     //MARK: - Data Fetch
     func requestPokemons() {
-        guard state == .ready else { return }
-        state = .loading
         
         let offsetQuery: [Query] = [.limit("1281")]
         
@@ -73,7 +67,6 @@ class PokemonVM: NSObject {
             switch result {
             case .success(let container):
                 DispatchQueue.main.async {
-                    self.pokemonData = container
                     self.appendDataSource(with: container.results)
                 }
             case .failure(let error):
