@@ -23,8 +23,8 @@ struct PokemonRequest<A:Codable>: Request {
         case detail(String)
         var string: String {
             switch self {
-            case .base: return "pokemon/"
-            case .detail(let name): return "pokemon/\(name)"
+            case .base: return "/api/v2/pokemon/"
+            case .detail(let name): return "api/v2/pokemon/\(name)"
             }
         }
     }
@@ -32,7 +32,7 @@ struct PokemonRequest<A:Codable>: Request {
     let baseURL: URL
     let path: Path
     
-    init(_ baseURL: URL, path: Path) {
+    init(_ baseURL: URL ,path: Path) {
         self.baseURL = baseURL
         self.path = path
     }

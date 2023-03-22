@@ -6,18 +6,25 @@
 //
 
 import UIKit
+struct Environment {
+    let server: Server
+}
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var server: Server?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        server = Server()
+        let environemnt = Environment(server: server!)
+        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = PokemonVC()
+        window?.rootViewController = PokemonVC(environemnt: environemnt, layout: UICollectionViewLayoutGenerator.generateLayoutForStyle(.paginated))
         window?.makeKeyAndVisible()
         
         configureNavigationBar()

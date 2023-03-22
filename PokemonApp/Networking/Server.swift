@@ -9,6 +9,7 @@ import Foundation
 class Server {
     
     public var baseURL: URL
+
     
     init(baseURL: URL = URL(string: "https://pokeapi.co/api/v2/")!) {
         self.baseURL = baseURL

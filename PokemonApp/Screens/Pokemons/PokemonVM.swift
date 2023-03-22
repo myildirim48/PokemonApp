@@ -14,21 +14,22 @@ class PokemonVM: NSObject {
     private enum State { case ready, loading }
 
     private var state: State = .ready
-    private var server: Server?
     private var request : PokemonRequest<PokemonModel>!
     private var requestLoader : RequestLoader<PokemonRequest<PokemonModel>>!
     private var dataSource : PokemonDataSource?
+    
+    private let environment: Environment
     
     private var pokemonData: PokemonModel?
     
     weak var errorHandler: PokemonViewModelErrorHandler?
     
-    override init() {
+    init(environment: Environment) {
+        self.environment = environment
         super.init()
         
-        request = try? server?.pokemonRequest()
+        request = try? environment.server.pokemonRequest()
         requestLoader = RequestLoader(request: request)
- 
     }
     
     func configureDataSource(with dataSource: PokemonDataSource){
@@ -58,30 +59,21 @@ class PokemonVM: NSObject {
     func item(for indexPath: IndexPath) -> PokemonModelResult? {
         dataSource?.itemIdentifier(for: indexPath)
     }
-    private func appendDataSource(with pokemons: [PokemonModelResult]) {
+    private func appendDataSource(with pokemon: [PokemonModelResult]) {
         guard let dataSource = dataSource else { return }
         defer { state = .ready }
 
         var currentSnapshot = dataSource.snapshot()
-        currentSnapshot.appendItems(pokemons, toSection: .main)
+        currentSnapshot.appendItems(pokemon, toSection: .main)
         apply(currentSnapshot)
     }
-    private func reloadDataSource(with pokemon: PokemonModelResult){
-        guard let dataSource = dataSource else { return }
-        defer { state = .ready }
-        
-        var snapShot = dataSource.snapshot()
-        if snapShot.itemIdentifiers.contains(pokemon) {
-            snapShot.reloadItems([pokemon])
-            apply(snapShot)
-        }
-    }
+
     private func configureDataSource(){
-        var initialSnapshot = PokemonSnapshot()
-        initialSnapshot.appendSections([.main])
-        initialSnapshot.appendItems([],toSection: .main)
-        apply(initialSnapshot, animating: false)
-    }
+         var initialSnapshot = PokemonSnapshot()
+         initialSnapshot.appendSections([.main])
+         initialSnapshot.appendItems([],toSection: .main)
+         apply(initialSnapshot, animating: false)
+     }
     
     private func apply(_ changes: PokemonSnapshot, animating: Bool = true){
         DispatchQueue.main.async {
@@ -103,7 +95,7 @@ class PokemonVM: NSObject {
         
         let offsetQuery: [Query] = [.offset("0")]
         
-        requestLoader.load(data: offsetQuery) { [weak self] result in
+        requestLoader.load(data: []) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
