@@ -13,10 +13,13 @@ class PokemonCell: UICollectionViewCell {
     let imageView = ImageView(frame: .zero)
     let nameLabel = PokLabel(textAligment: .left
                              , font: .systemFont(ofSize: 18,weight: .semibold))
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
     
+    private var imgUrlFromVC : String = ""
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        activityIndicator.startAnimating()
     }
     
     required init?(coder: NSCoder) {
@@ -25,14 +28,24 @@ class PokemonCell: UICollectionViewCell {
     
     var pokemon: PokemonModelResult? {
         didSet {
-            nameLabel.text = pokemon?.name.capitalizingFirstLetter()
+            guard let pokemon = pokemon else { return }
+            nameLabel.text = pokemon.name.capitalizingFirstLetter()
+            imgUrlFromVC = pokemon.url.slice(from: "pokemon/", to: "/") ?? "Error while slice the url"
+            let newUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(imgUrlFromVC).png"
+            Task {
+                self.imageView.image = await ImageFetcher.shared.downloadImage(from: newUrl)
+                self.activityIndicator.stopAnimating()
+            }
         }
     }
     
     //MARK: - Private
     
     private func configure() {
-        addSubviews(imageView,nameLabel)
+        addSubviews(imageView,nameLabel,activityIndicator)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
         
         let spacing = CGFloat(20)
         let innerSpace = CGFloat(10)
@@ -40,6 +53,9 @@ class PokemonCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 10
         NSLayoutConstraint.activate([
         
+            activityIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: innerSpace),
             imageView.topAnchor.constraint(equalTo: topAnchor,constant: innerSpace),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor,constant: innerSpace),

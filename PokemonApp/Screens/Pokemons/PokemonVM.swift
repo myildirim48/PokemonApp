@@ -36,25 +36,6 @@ class PokemonVM: NSObject {
         self.dataSource = dataSource
         configureDataSource()
     }
-    // MARK: - Pagination
-//    private let defaultPageSize = 20
-//    private let defaultPrefetchBuffer = 1
-//
-//    private var requestOffset: Int {
-//        guard let co = dataContainer else {
-//            return 0
-//        }
-//        let newOffset = co. + defaultPageSize
-//        return newOffset >= co.total ? co.offset : newOffset
-//    }
-//    private var hasNextPage: Bool {
-//        guard let co = dataContainer else {
-//            return true
-//        }
-//        let newOffset = co.offset + defaultPageSize
-//        return newOffset >= co.total ? false : true
-//    }
-    
     //MARK: - Data Source
     func item(for indexPath: IndexPath) -> PokemonModelResult? {
         dataSource?.itemIdentifier(for: indexPath)
@@ -80,21 +61,13 @@ class PokemonVM: NSObject {
     }
     
     //MARK: - Data Fetch
-    @MainActor func shouldFetchData(index: Int){
-        guard let dataSource = dataSource else { return }
-        let currentSnapshot = dataSource.snapshot()
-        
-//        guard currentSnapshot.numberOfItems == (index + defaultPrefetchBuffer) && hasNextPage && state == .ready else { return }
-        requestPokemons()
-    }
-    
     func requestPokemons() {
         guard state == .ready else { return }
         state = .loading
         
-        let offsetQuery: [Query] = [.offset("0")]
+        let offsetQuery: [Query] = [.offset("50")]
         
-        requestLoader.load(data: []) { [weak self] result in
+        requestLoader.load(data: offsetQuery) { [weak self] result in
             guard let self = self else { return }
             
             switch result {

@@ -35,8 +35,9 @@ class PokemonDetailVC: UIViewController {
         configure()
         configureDoneButton()
         
-        guard let name = pokemonName else { return }
-        detailVM.requestDetails(name: name)
+        if let name = pokemonName {
+            detailVM.requestDetails(name: name)
+        }
         detailVM.pokemonDetailsVoid = { data in
             self.updateUI(with: data)
         }
@@ -57,8 +58,8 @@ class PokemonDetailVC: UIViewController {
         let abilities = pokemon.abilities.map({ $0.ability.name.capitalizingFirstLetter()
         }).joined(separator: ", ")
         abilityLabel.text = "Abilities  :  \(abilities)"
-        weightLabel.text = "Weight    :  \(pokemon.weight)"
-        heightLabel.text = "Height     :  \(pokemon.height)"
+        weightLabel.text = "Weight    :   \(pokemon.weight)"
+        heightLabel.text = "Height     :   \(pokemon.height)"
         
         DispatchQueue.main.async {
             Task {

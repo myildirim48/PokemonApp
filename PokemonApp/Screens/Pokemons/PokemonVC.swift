@@ -11,7 +11,7 @@ class PokemonVC: UICollectionViewController {
         
     private let environment: Environment!
     private var viewModel: PokemonVM!
-    
+        
     required init?(coder:NSCoder) {
         self.environment = Environment(server: Server())
         super.init(coder: coder)

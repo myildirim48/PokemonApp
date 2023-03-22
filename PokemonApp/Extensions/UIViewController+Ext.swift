@@ -7,7 +7,7 @@
 
 import UIKit
 extension UIViewController {
-    
+    #warning("")
     func presentAlertWithError(message: UserFriendlyError, callback: @escaping(Bool) -> Void){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: message.title, message: message.message, preferredStyle: .alert)

@@ -21,26 +21,20 @@ class PokemonDetailVM: NSObject {
 
     }
     
-    func requestDetails(name: String) -> String? {
+    func requestDetails(name: String) {
         
         detailRequest = try? environment.server.pokemonDetailRequest(with: name)
         detailRequestLoader = RequestLoader(request: detailRequest)
-        
-        var imgUrl : String?
         
         detailRequestLoader.load(data: []) { result in
             switch result {
             case .success(let success):
                 DispatchQueue.main.async {
                     self.pokemonDetailsVoid(success)
-                    imgUrl = success.sprites.other?.home.frontDefault
                 }
             case .failure(let failure):
                 print(failure)
             }
         }
-        
-        return imgUrl
-        
     }
 }
