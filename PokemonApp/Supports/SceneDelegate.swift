@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = PokemonVC(environemnt: environemnt, layout: UICollectionViewLayoutGenerator.generateLayoutForStyle(.paginated))
+        window?.rootViewController = PokemonVC(environemnt: environemnt, layout: UIHelper.pokemonCollectionViewLayout())
         window?.makeKeyAndVisible()
         
         configureNavigationBar()

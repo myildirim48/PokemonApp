@@ -38,7 +38,6 @@ class PokemonVC: UICollectionViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(PokemonCell.self, forCellWithReuseIdentifier: PokemonCell.reuseID)
-        collectionView.register(LoaderReusableView.self, forSupplementaryViewOfKind: LoaderReusableView.elementKind, withReuseIdentifier: LoaderReusableView.reuseIdentifier)
     }
 }
 //MARK: -  Datasource
@@ -51,15 +50,6 @@ extension PokemonVC {
             cell.pokemon = pokemon
             return cell
         })
-        dataSource.supplementaryViewProvider = {(collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
-            switch kind {
-            case LoaderReusableView.elementKind:
-                let loaderSupplementary = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LoaderReusableView.reuseIdentifier, for: indexPath) as! LoaderReusableView
-                return loaderSupplementary
-            default:
-                return nil
-            }
-        }
         return dataSource
     }
 }

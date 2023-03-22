@@ -24,7 +24,7 @@ struct PokemonRequest<A:Codable>: Request {
         var string: String {
             switch self {
             case .base: return "/api/v2/pokemon/"
-            case .detail(let name): return "api/v2/pokemon/\(name)"
+            case .detail(let name): return "/api/v2/pokemon/\(name)"
             }
         }
     }

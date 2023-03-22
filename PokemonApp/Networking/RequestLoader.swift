@@ -2,7 +2,7 @@
 //  RequestLoader.swift
 //  PokemonApp
 //
-//  Created by YILDIRIM on 21.03.2023.
+//  Created by YILDIRIM on 22.03.2023.
 //
 
 import Foundation

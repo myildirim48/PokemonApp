@@ -17,11 +17,14 @@ class Server {
     
     // MARK: - Pokemon Requests
     
-    /// CharacterRequest for Characters
-    /// - Parameter : Public Characters
-    /// - Returns: Authenticated request with matching Character type
+    /// Pokemon Request for Pokemons
     func pokemonRequest() throws -> PokemonRequest<PokemonModel>{
         return PokemonRequest(baseURL, path: .base)
+    }
+    
+    /// Pokemon Detail for Pokemon
+    func pokemonDetailRequest(with name:String) throws -> PokemonRequest<PokemonModel>{
+        return PokemonRequest(baseURL, path: .detail(name))
     }
     
 }

@@ -9,8 +9,9 @@ import UIKit
 
 class ImageFetcher {
     static let shared = ImageFetcher()
+    
     let imgCache = NSCache<NSString,UIImage>()
-
+    
     //DownloadImage
     func downloadImage(from urlString:String) async -> UIImage? {
         

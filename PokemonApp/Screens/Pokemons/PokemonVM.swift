@@ -76,19 +76,18 @@ class PokemonVM: NSObject {
      }
     
     private func apply(_ changes: PokemonSnapshot, animating: Bool = true){
-        DispatchQueue.main.async {
             self.dataSource?.apply(changes, animatingDifferences: animating)
-        }
     }
     
     //MARK: - Data Fetch
-    func shouldFetchData(index: Int){
+    @MainActor func shouldFetchData(index: Int){
         guard let dataSource = dataSource else { return }
         let currentSnapshot = dataSource.snapshot()
         
 //        guard currentSnapshot.numberOfItems == (index + defaultPrefetchBuffer) && hasNextPage && state == .ready else { return }
         requestPokemons()
     }
+    
     func requestPokemons() {
         guard state == .ready else { return }
         state = .loading
@@ -100,8 +99,10 @@ class PokemonVM: NSObject {
             
             switch result {
             case .success(let container):
-                self.pokemonData = container
-                self.appendDataSource(with: container.results)
+                DispatchQueue.main.async {
+                    self.pokemonData = container
+                    self.appendDataSource(with: container.results)
+                }
             case .failure(let error):
                 guard let handler = self.errorHandler else { return }
                 handler.viewModelDidReceiveError(error: .userFriendlyError(error))

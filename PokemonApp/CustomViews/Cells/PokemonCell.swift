@@ -12,7 +12,7 @@ class PokemonCell: UICollectionViewCell {
 
     let imageView = ImageView(frame: .zero)
     let nameLabel = PokLabel(textAligment: .left
-                             , font: .systemFont(ofSize: 14))
+                             , font: .systemFont(ofSize: 18,weight: .semibold))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
