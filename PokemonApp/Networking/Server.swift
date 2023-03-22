@@ -23,7 +23,7 @@ class Server {
     }
     
     /// Pokemon Detail for Pokemon
-    func pokemonDetailRequest(with name:String) throws -> PokemonRequest<PokemonModel>{
+    func pokemonDetailRequest(with name:String) throws -> PokemonRequest<PokemonDetails>{
         return PokemonRequest(baseURL, path: .detail(name))
     }
     

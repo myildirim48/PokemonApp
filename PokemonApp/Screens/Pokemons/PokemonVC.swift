@@ -40,6 +40,19 @@ class PokemonVC: UICollectionViewController {
         collectionView.register(PokemonCell.self, forCellWithReuseIdentifier: PokemonCell.reuseID)
     }
 }
+//MARK: - CollectionView delegate
+extension PokemonVC {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedPokemon = viewModel.item(for: indexPath)
+        
+        let detailVC = PokemonDetailVC(environment: environment)
+        detailVC.pokemonName = selectedPokemon?.name
+        detailVC.activityIndicator.startAnimating()
+        let navController = UINavigationController(rootViewController: detailVC)
+        present(navController, animated: true)
+    }
+}
+
 //MARK: -  Datasource
 extension PokemonVC {
     private func generateDatasource(for collectionView: UICollectionView) -> PokemonDataSource {

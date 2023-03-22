@@ -37,6 +37,7 @@ class PokemonCell: UICollectionViewCell {
         let spacing = CGFloat(20)
         let innerSpace = CGFloat(10)
         
+        imageView.layer.cornerRadius = 10
         NSLayoutConstraint.activate([
         
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: innerSpace),

@@ -21,11 +21,9 @@ class ImageView: UIImageView {
     }
     
     private func configure() {
-        backgroundColor = .red
         clipsToBounds = true
-        contentMode = .scaleToFill
+        contentMode = .scaleAspectFit
         translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 10
     }
     
     func downloadImage(fromUrl pokemonID: Int, placeHolderImage:UIImage ) {
